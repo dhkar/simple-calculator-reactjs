@@ -1,0 +1,12 @@
+.button-bg {
+    background-color: lightgray;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.screen-bg {
+    background-color: rgb(185, 212, 32);
+    display: flex;
+    flex-wrap: wrap;
+}
+
