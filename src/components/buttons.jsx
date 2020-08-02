@@ -13,6 +13,7 @@ class Buttons extends Component {
                         <Button
                             key={btnProps.id}
                             content={btnProps.id}
+                            onClickNumbers={this.props.onClickNumber}
                         />
                     ))}
                 </div>
@@ -21,6 +22,7 @@ class Buttons extends Component {
                         <Button
                             key={btnProps.id}
                             content={btnProps.id}
+                            onClickNumbers={this.props.onClickNumber}
                         />
                     ))}
                 </div>
@@ -29,6 +31,7 @@ class Buttons extends Component {
                         <Button
                             key={btnProps.id}
                             content={btnProps.id}
+                            onClickNumbers={this.props.onClickNumber}
                         />
                     ))}
                 </div>
@@ -37,6 +40,7 @@ class Buttons extends Component {
                         <Button
                             key={btnProps.id}
                             content={btnProps.id}
+                            onClickNumbers={this.props.onClickNumber}
                         />
                     ))}
                 </div>

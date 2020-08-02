@@ -38,13 +38,10 @@ class Calc extends Component {
         }
     }
 
-    // handleClickNumber = () => {
-    //     let x = this.state.timesClicked;
-
-    //     x = x + 1;
-    //     this.setState({ timesClicked: x });
-    //     console.log(this.state.timesClicked);
-    // }
+    handleClickNumber = (btnId) => {
+        let x = 8989;
+        console.log(btnId);
+    }
 
 
 
@@ -62,7 +59,7 @@ class Calc extends Component {
                 <div className="container">
                     <Buttons
                         buttonProps={this.state.buttonProps}
-
+                        onClickNumber={this.handleClickNumber}
                     />
                 </div>
             </React.Fragment>

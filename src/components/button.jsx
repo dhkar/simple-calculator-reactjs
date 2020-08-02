@@ -12,10 +12,18 @@ class Button extends Component {
         }
     }
 
+    onClick = () => {
+        const btnId = this.props.content;
+        this.props.onClickNumbers(btnId);
+    }
+
     render() {
+
+
         return (
 
             <button type="button"
+                onClick={this.onClick}
                 className={this.isOperationSymbol()}
             >
                 {this.props.content}
