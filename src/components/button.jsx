@@ -4,7 +4,7 @@ class Button extends Component {
 
     // Returns red button if the content is not a number
     isOperationSymbol = () => {
-        if (Number.isInteger(this.props.content)) {
+        if (Number.isInteger(this.props.content) || this.props.content === ".") {
             return "btn btn-primary btn-lg m-2";
         }
         else {

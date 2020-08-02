@@ -34,15 +34,51 @@ class Calc extends Component {
                     { id: "=", type: "misc" },
                     { id: "÷", type: "misc" }
                 ]
-            }
+            },
+
+            screenProps: {
+                firstNum: "0",
+                secondNum: ""
+            },
+
+            mode: 0
         }
     }
 
     handleClickNumber = (btnId) => {
-        let x = 8989;
-        console.log(btnId);
+
+        // Detecting First Number, adds number to the screen until operation symbol clicked
+        if (((this.state.mode === 0) && (Number.isInteger(btnId))) || (btnId === ".")) {
+            var latest_firstNum;
+            if (this.state.screenProps.firstNum === "0") {
+                latest_firstNum = "";
+            }
+            else {
+                latest_firstNum = this.state.screenProps.firstNum;
+            }
+            let newNum = btnId.toString();
+
+            let updatedNum = latest_firstNum + newNum;
+            this.setState({
+
+                screenProps: {
+                    firstNum: updatedNum,
+                    secondNum: ""
+                }
+
+            });
+        }
+
+
     }
 
+    // handleRefreshScreen = () => {
+    // change the state to :
+    // screenProps: {
+    //     firstNum : "",
+    //     secondNum: ""
+    // }
+    // }
 
 
     render() {
@@ -54,7 +90,7 @@ class Calc extends Component {
                 <h1 className="m-2" style={{ textAlign: "center" }}>Simple Calculator Apps By Dhika</h1>
                 <p style={{ whiteSpace: "pre-line" }}>{breaklines.join('\n')}</p>
                 <div className="container">
-                    <Screen />
+                    <Screen content={this.state.screenProps.firstNum} />
                 </div>
                 <div className="container">
                     <Buttons
