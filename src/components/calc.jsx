@@ -38,17 +38,19 @@ class Calc extends Component {
 
             screenProps: {
                 firstNum: "0",
-                secondNum: ""
+                secondNum: "",
+                operationSym: "",
+                mode: 0
             },
 
-            mode: 0
+
         }
     }
 
     handleClickNumber = (btnId) => {
 
         // Detecting First Number, adds number to the screen until operation symbol clicked
-        if (((this.state.mode === 0) && (Number.isInteger(btnId))) || (btnId === ".")) {
+        if ((((this.state.screenProps.mode === 0) && (Number.isInteger(btnId)))) || (btnId === ".")) {
             var latest_firstNum;
             if (this.state.screenProps.firstNum === "0") {
                 latest_firstNum = "";
@@ -63,8 +65,51 @@ class Calc extends Component {
 
                 screenProps: {
                     firstNum: updatedNum,
-                    secondNum: ""
-                }
+                    secondNum: "",
+                    operationSym: "",
+                    mode: 0
+                },
+
+            });
+        }
+
+        // Handle if operation symbol clicked
+        if ((((this.state.screenProps.mode === 0) && !(Number.isInteger(btnId)))) && (btnId !== ".")) {
+
+            let latest_firstNums = this.state.screenProps.firstNum;
+            this.setState({
+
+                screenProps: {
+                    firstNum: latest_firstNums,
+                    secondNum: latest_firstNums,
+                    operationSym: btnId,
+                    mode: 1
+                },
+
+
+            });
+        }
+
+
+        // Detecting Second Number, adds number to the screen until operation symbol clicked
+        if (this.state.screenProps.mode === 1) {
+
+            let latest_firstNums = this.state.screenProps.firstNum;
+            let opSym = this.state.screenProps.operationSym;
+            var latest_secondNum;
+            latest_secondNum = this.state.screenProps.secondNum;
+
+            let newNum = btnId.toString();
+
+            let updatedNum = latest_secondNum + newNum;
+            this.setState({
+
+                screenProps: {
+                    firstNum: latest_firstNums,
+                    secondNum: updatedNum,
+                    operationSym: opSym,
+                    mode: 1
+                },
 
             });
         }
@@ -90,7 +135,7 @@ class Calc extends Component {
                 <h1 className="m-2" style={{ textAlign: "center" }}>Simple Calculator Apps By Dhika</h1>
                 <p style={{ whiteSpace: "pre-line" }}>{breaklines.join('\n')}</p>
                 <div className="container">
-                    <Screen content={this.state.screenProps.firstNum} />
+                    <Screen content={this.state.screenProps} />
                 </div>
                 <div className="container">
                     <Buttons
