@@ -43,6 +43,7 @@ class Calc extends Component {
                 mode: 0
             },
 
+            stringToParse: ""
 
         }
     }
@@ -50,7 +51,7 @@ class Calc extends Component {
     handleClickNumber = (btnId) => {
 
         // Detecting First Number, adds number to the screen until operation symbol clicked
-        if ((((this.state.screenProps.mode === 0) && (Number.isInteger(btnId)))) || (btnId === ".")) {
+        if (((this.state.screenProps.mode === 0) && ((Number.isInteger(btnId)) || (btnId === ".")))) {
             var latest_firstNum;
             if (this.state.screenProps.firstNum === "0") {
                 latest_firstNum = "";
@@ -69,30 +70,38 @@ class Calc extends Component {
                     operationSym: "",
                     mode: 0
                 },
-
             });
         }
 
         // Handle if operation symbol clicked
         if ((((this.state.screenProps.mode === 0) && !(Number.isInteger(btnId)))) && (btnId !== ".")) {
-
             let latest_firstNums = this.state.screenProps.firstNum;
             this.setState({
 
                 screenProps: {
                     firstNum: latest_firstNums,
-                    secondNum: latest_firstNums,
+                    secondNum: "",
                     operationSym: btnId,
                     mode: 1
                 },
-
-
             });
         }
 
+        if ((((this.state.screenProps.mode === 1) && !(Number.isInteger(btnId)))) && (btnId !== ".")) {
+            let latest_secondNums = this.state.screenProps.firstNum;
+            this.setState({
+
+                screenProps: {
+                    firstNum: "",
+                    secondNum: latest_secondNums,
+                    operationSym: btnId,
+                    mode: 0
+                },
+            });
+        }
 
         // Detecting Second Number, adds number to the screen until operation symbol clicked
-        if (this.state.screenProps.mode === 1) {
+        if (((this.state.screenProps.mode === 1) && ((Number.isInteger(btnId)) || (btnId === ".")))) {
 
             let latest_firstNums = this.state.screenProps.firstNum;
             let opSym = this.state.screenProps.operationSym;
@@ -110,20 +119,24 @@ class Calc extends Component {
                     operationSym: opSym,
                     mode: 1
                 },
-
             });
         }
 
+        // Adds every clicked button Id to string (for calculation purpose)
+        this.handleStringOperation(btnId);
 
     }
 
-    // handleRefreshScreen = () => {
-    // change the state to :
-    // screenProps: {
-    //     firstNum : "",
-    //     secondNum: ""
-    // }
-    // }
+    handleStringOperation = (buttonId) => {
+
+        let latest_string = this.state.stringToParse;
+        if (buttonId === "=") {
+            this.setState({ stringToParse: "" });
+        }
+        else {
+            this.setState({ stringToParse: latest_string + buttonId });
+        }
+    }
 
 
     render() {

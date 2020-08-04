@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class Screen extends Component {
 
     isFirstNumber = (props) => {
-        if (this.props.content.mode === 0) {
+        if (this.props.content.mode === 0 || this.props.content.secondNum === "") {
             return this.props.content.firstNum
         }
-        else {
+        else if (this.props.content.mode === 1 || this.props.content.firstNum === "") {
             return this.props.content.secondNum
         }
     }
