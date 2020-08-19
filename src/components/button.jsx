@@ -7,6 +7,9 @@ class Button extends Component {
         if (Number.isInteger(this.props.content) || this.props.content === ".") {
             return "btn btn-primary btn-lg m-2";
         }
+        else if (this.props.content === "CLR") {
+            return "btn btn-secondary btn-lg m-2";
+        }
         else {
             return "btn btn-danger btn-lg m-2";
         }
@@ -14,7 +17,13 @@ class Button extends Component {
 
     onClick = () => {
         const btnId = this.props.content;
-        this.props.onClickNumbers(btnId);
+        if (btnId === "CLR") {
+            this.props.onClickCLR();
+        }
+        else {
+
+            this.props.onClickNumbers(btnId);
+        }
     }
 
     render() {
